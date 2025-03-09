@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://oyj4qucb6tme"]
+
+[ext_resource type="PackedScene" uid="uid://dyhvoundu2kqc" path="res://parts/Building.tscn" id="1_t6gs0"]
+[ext_resource type="PackedScene" uid="uid://bq16fe5njnr2i" path="res://parts/Box.tscn" id="2_lfd1m"]
+[ext_resource type="PackedScene" uid="uid://kdpe7o4ec1fa" path="res://parts/DiffuseSensor.tscn" id="3_uobxk"]
+
+[node name="Simulation" type="Node3D"]
+
+[node name="Building" parent="." instance=ExtResource("1_t6gs0")]
+
+[node name="Box" parent="." instance=ExtResource("2_lfd1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.91297, -1.5, -1.07682)
+
+[node name="DiffuseSensor" parent="." instance=ExtResource("3_uobxk")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -0.86246, -1.788, -4.09003)
+show_beam = true
+tag_name = "TEST_INPUT"
