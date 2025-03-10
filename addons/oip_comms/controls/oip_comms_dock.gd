@@ -8,6 +8,7 @@ const TAG_GROUPS_FILE := "res://addons/oip_comms/save_data/tag_groups.json"
 const TAG_GROUP = preload("res://addons/oip_comms/controls/tag_group.tscn")
 
 @onready var v_box_container: VBoxContainer = $ScrollContainer/VBoxContainer
+@onready var enable_comms: CheckBox = $EnableComms
 
 var tag_groups_data: Array = []
 var last_tag_groups_data: Array = []
@@ -16,10 +17,12 @@ var changes_present := false
 func _ready() -> void:
 	load_tag_groups_data()
 	load_tag_groups_ui()
+	register_tag_groups()
 	
 	last_tag_groups_data = tag_groups_data.duplicate(true)
 	
-	SimulationEvents.simulation_started.connect(simulation_started)
+	SimulationEvents.simulation_started.connect(_on_simulation_started)
+	SimulationEvents.simulation_ended.connect(_on_simulation_ended)
 
 func _process(_delta: float) -> void:
 	if tag_groups_data.hash() != last_tag_groups_data.hash():
@@ -52,12 +55,13 @@ func tag_group_save(_t: OIPCommsTagGroup) -> void:
 func save_all() -> void:
 	changes_present = false
 	save_changes.emit(changes_present)
-	
+
 	save_tag_groups_ui()
 	
 	var buffer_tag_groups_data := tag_groups_data.duplicate(true)
 	
 	if last_tag_groups_data.hash() != tag_groups_data.hash():
+		
 		save_tag_groups_data()
 		print("OIP Comms: Tag group data saved")
 		
@@ -118,8 +122,15 @@ func register_tag_groups() -> void:
 		var c: String = tag_group_data.cpu
 		OIPComms.register_tag_group(n, int(pr), pt, g, p, c)
 
-func simulation_started() -> void:
-	pass
-
 func _on_EnableComms_toggled(toggled_on: bool) -> void:
 	OIPComms.set_enable_comms(toggled_on)
+
+
+func _on_EnableLogging_toggled(toggled_on: bool) -> void:
+	OIPComms.set_enable_log(toggled_on)
+
+func _on_simulation_started() -> void:
+	OIPComms.set_sim_running(true)
+
+func _on_simulation_ended() -> void:
+	OIPComms.set_sim_running(false)

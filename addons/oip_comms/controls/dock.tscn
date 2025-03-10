@@ -17,7 +17,16 @@ offset_left = 772.0
 offset_top = 34.0
 offset_right = 886.0
 offset_bottom = 59.0
+button_pressed = true
 text = "Enable Comms"
+
+[node name="EnableLogging" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 772.0
+offset_top = 74.0
+offset_right = 886.0
+offset_bottom = 99.0
+text = "Enable Logging to Console"
 
 [node name="TagGroupConfigLabel" type="Label" parent="."]
 layout_mode = 0
@@ -62,6 +71,7 @@ offset_bottom = 279.0
 layout_mode = 2
 
 [connection signal="toggled" from="EnableComms" to="." method="_on_EnableComms_toggled"]
+[connection signal="toggled" from="EnableLogging" to="." method="_on_EnableLogging_toggled"]
 [connection signal="pressed" from="AddTagGroup" to="." method="_on_AddTagGroup_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]

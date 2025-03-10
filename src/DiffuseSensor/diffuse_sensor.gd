@@ -6,6 +6,7 @@ var ray_mesh: MeshInstance3D
 var cylinder_mesh: CylinderMesh
 var ray_material: StandardMaterial3D
 
+@export var enable_comms := true
 @export var tag_group_name := "TagGroup0"
 @export var tag_name := ""
 
@@ -20,14 +21,14 @@ var ray_material: StandardMaterial3D
 @export var beam_scan_color: Color = Color.GREEN
 @export var blocked: bool = false:
 	set(value):
-		if last_blocked != value:
+		if register_tag_ok and last_blocked != int(value):
 			OIPComms.write_bit(tag_group_name, tag_name, int(value))
 
 		blocked = value
-		last_blocked = value
-		pass
+		last_blocked = int(value)
 
-var last_blocked := false
+var last_blocked := 2 # init as 2 to ensure first write is picked up
+var register_tag_ok := false
 
 func _validate_property(property: Dictionary):
 	if property.name == "blocked":
@@ -75,7 +76,8 @@ func _physics_process(delta: float) -> void:
 	ray_mesh.position = Vector3(0, 0, cylinder_mesh.height * 0.5)
 
 func _on_simulation_started() -> void:
-	OIPComms.register_tag(tag_group_name, tag_name, 1)
+	if enable_comms:
+		register_tag_ok = OIPComms.register_tag(tag_group_name, tag_name, 1)
 
 func _on_simulation_ended() -> void:
 	cylinder_mesh.height = max_range

@@ -6,8 +6,7 @@ var data: StackLightData = load("res://src/StackLight/StackLightData.tres")
 
 var prev_scale: Vector3
 
-@export var tag_group_name := "TagGroup0"
-@export var tag_name := ""
+@export var enable_comms := true
 
 var Segments: int = 1:
 	set(value):
@@ -87,6 +86,9 @@ func _ready() -> void:
 	InitSegments()
 	prev_scale = scale
 	Rescale()
+	
+	# need to run this at least once at the beginning
+	
 
 
 func _enter_tree() -> void:
@@ -96,26 +98,26 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	SimulationEvents.simulation_started.disconnect(_on_simulation_started)
+	OIPComms.tag_group_polled.disconnect(_tag_group_polled)
 
 func _on_simulation_started() -> void:
-	for i in range(Segments):
-		var segment: StackSegmentData = get("Light " + str(i + 1))
-		OIPComms.register_tag(segment.tag_group_name, segment.tag_name, 1)
+	if enable_comms:
+		for i in range(Segments):
+			var segment: StackSegmentData = get("Light " + str(i + 1))
+			OIPComms.register_tag(segment.tag_group_name, segment.tag_name, 1)
+			
+			# create hash map that links the tag group name to the tag/stack segment
+			if segment.tag_group_name not in tags_by_group:
+				tags_by_group[segment.tag_group_name] = {}
+			
+			tags_by_group[segment.tag_group_name][segment.tag_name] = segment
 		
-		# create hash map that links the tag group name to the tag/stack segment
-		if segment.tag_group_name not in tags_by_group:
-			tags_by_group[segment.tag_group_name] = {}
-		
-		tags_by_group[segment.tag_group_name][segment.tag_name] = segment
-		
-var time_since_last := 0
 func _tag_group_polled(_tag_group_name: String) -> void:
-	print("POLLED " + _tag_group_name + ", time = " + str(Time.get_ticks_msec() - time_since_last))
-	time_since_last = Time.get_ticks_msec()
+	if not enable_comms: return
 	if _tag_group_name in tags_by_group:
 		for tag_name in tags_by_group[_tag_group_name]:
 			var segment: StackSegmentData = tags_by_group[_tag_group_name][tag_name]
-			segment.active = OIPComms.read_bit(_tag_group_name, tag_name)
+			segment.active = bool(OIPComms.read_bit(_tag_group_name, tag_name))
 
 func _process(delta: float) -> void:
 	if scale != prev_scale:
