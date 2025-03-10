@@ -1,1 +1,1 @@
-[{"cpu":"ControlLogix","gateway":"localhost","name":"TagGroup0","path":"1,2","polling_rate":"2000","protocol":"ab_eip"}]
+[{"cpu":"ControlLogix","gateway":"localhost","name":"TagGroup0","path":"1,2","polling_rate":"500","protocol":"ab_eip"}]

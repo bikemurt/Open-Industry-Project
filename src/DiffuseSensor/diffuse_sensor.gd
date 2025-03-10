@@ -6,6 +6,9 @@ var ray_mesh: MeshInstance3D
 var cylinder_mesh: CylinderMesh
 var ray_material: StandardMaterial3D
 
+@export var tag_group_name := "TagGroup0"
+@export var tag_name := ""
+
 @export var max_range: float = 6.0
 @export var show_beam: bool :
 	set(value): 
@@ -23,9 +26,6 @@ var ray_material: StandardMaterial3D
 		blocked = value
 		last_blocked = value
 		pass
-
-@export var tag_group_name := "TagGroup0"
-@export var tag_name := ""
 
 var last_blocked := false
 

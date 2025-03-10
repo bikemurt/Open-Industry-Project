@@ -28,7 +28,6 @@ func save() -> void:
 	save_data["cpu"] = cpu.text
 
 func _load() -> void:
-	print(save_data)
 	if "name" in save_data:
 		_name.text = save_data["name"]
 		polling_rate.value = int(save_data["polling_rate"])
