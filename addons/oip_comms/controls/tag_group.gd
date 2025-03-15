@@ -1,9 +1,9 @@
 @tool
-class_name OIPCommsTagGroup
+class_name _OIPCommsTagGroup
 extends Control
 
-signal tag_group_delete(t: OIPCommsTagGroup)
-signal tag_group_save(t: OIPCommsTagGroup)
+signal tag_group_delete(t: _OIPCommsTagGroup)
+signal tag_group_save(t: _OIPCommsTagGroup)
 
 var save_data := {}
 

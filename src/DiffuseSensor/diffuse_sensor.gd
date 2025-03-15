@@ -22,7 +22,7 @@ var ray_material: StandardMaterial3D
 @export var blocked: bool = false:
 	set(value):
 		if register_tag_ok and last_blocked != int(value):
-			OIPComms.write_bit(tag_group_name, tag_name, int(value))
+			OIPComms.write_bit(tag_group_name, tag_name, value)
 
 		blocked = value
 		last_blocked = int(value)

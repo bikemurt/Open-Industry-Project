@@ -3,7 +3,7 @@ extends EditorPlugin
 
 const DOCK = preload("res://addons/oip_comms/controls/dock.tscn")
 
-var _dock: OIPCommsDock
+var _dock: _OIPCommsDock
 var bottom_panel_button: Button
 
 func _enter_tree() -> void:

@@ -1,5 +1,10 @@
 @tool
-class_name OIPCommsDock
+
+# TBD -> figure out how to programmatically disable these classes from editor
+# end user does not need to see them
+# https://forum.godotengine.org/t/how-to-exclude-custom-classes-from-the-create-new-node-menu/51269/9
+# right now the type hints are useful
+class_name _OIPCommsDock
 extends Control
 
 signal save_changes(value: bool)
@@ -15,6 +20,7 @@ var last_tag_groups_data: Array = []
 var changes_present := false
 
 func _ready() -> void:
+	
 	load_tag_groups_data()
 	load_tag_groups_ui()
 	register_tag_groups()
@@ -39,7 +45,7 @@ func load_tag_groups_data() -> void:
 		save_file.close()
 	
 func load_tag_groups_ui() -> void:
-	for tag_group: OIPCommsTagGroup in v_box_container.get_children():
+	for tag_group: _OIPCommsTagGroup in v_box_container.get_children():
 		tag_group.queue_free()
 	
 	for tag_group_data: Dictionary in tag_groups_data:
@@ -49,7 +55,7 @@ func load_tag_groups_ui() -> void:
 		tag_group.tag_group_save.connect(tag_group_save)
 		v_box_container.add_child(tag_group)
 
-func tag_group_save(_t: OIPCommsTagGroup) -> void:
+func tag_group_save(_t: _OIPCommsTagGroup) -> void:
 	save_tag_groups_ui()
 
 func save_all() -> void:
@@ -72,7 +78,7 @@ func save_all() -> void:
 
 func save_tag_groups_ui() -> void:
 	tag_groups_data = []
-	for tag_group: OIPCommsTagGroup in v_box_container.get_children():
+	for tag_group: _OIPCommsTagGroup in v_box_container.get_children():
 		tag_group.save()
 		tag_groups_data.push_back(tag_group.save_data)
 
@@ -82,11 +88,11 @@ func save_tag_groups_data() -> void:
 	save_file.store_line(json_string)
 	save_file.close()
 
-func tag_group_delete(t: OIPCommsTagGroup) -> void:
+func tag_group_delete(t: _OIPCommsTagGroup) -> void:
 	var index := -1
 	
 	var i := 0
-	for tag_group: OIPCommsTagGroup in v_box_container.get_children():
+	for tag_group: _OIPCommsTagGroup in v_box_container.get_children():
 		if tag_group == t:
 			index = i
 			break
