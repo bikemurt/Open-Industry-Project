@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://oyj4qucb6tme"]
+[gd_scene load_steps=11 format=3 uid="uid://oyj4qucb6tme"]
 
 [ext_resource type="PackedScene" uid="uid://dyhvoundu2kqc" path="res://parts/Building.tscn" id="1_t6gs0"]
 [ext_resource type="PackedScene" uid="uid://bq16fe5njnr2i" path="res://parts/Box.tscn" id="2_lfd1m"]
@@ -7,8 +7,9 @@
 [ext_resource type="Script" uid="uid://bl7o7avq4pi78" path="res://src/StackLight/stack_light_data.gd" id="5_vtp77"]
 [ext_resource type="Script" uid="uid://buet0tp11gjdl" path="res://src/StackLight/stack_segment_data.gd" id="6_qdflh"]
 [ext_resource type="Script" uid="uid://b861vl8gbbqmh" path="res://testing/test_dint_32_bit_signed.gd" id="7_vtp77"]
+[ext_resource type="Script" uid="uid://crgyex8mqo1n0" path="res://opcua_test.gd" id="8_qdflh"]
 
-[sub_resource type="Resource" id="Resource_vtp77"]
+[sub_resource type="Resource" id="Resource_qdflh"]
 resource_local_to_scene = true
 script = ExtResource("6_qdflh")
 tag_group_name = "TagGroup0"
@@ -16,10 +17,10 @@ tag_name = "TEST_OUTPUT"
 active = false
 segment_color = Color(0, 1, 0, 0.5)
 
-[sub_resource type="Resource" id="Resource_qdflh"]
+[sub_resource type="Resource" id="Resource_crdol"]
 resource_local_to_scene = true
 script = ExtResource("5_vtp77")
-segment_datas = [SubResource("Resource_vtp77")]
+segment_datas = [SubResource("Resource_qdflh")]
 
 [node name="Simulation" type="Node3D"]
 
@@ -35,10 +36,13 @@ show_beam = true
 
 [node name="StackLight" parent="." instance=ExtResource("4_mpm82")]
 transform = Transform3D(3, 0, 0, 0, 0.45, 0, 0, 0, 3, -2.73838, -2, 1.20489)
-data = SubResource("Resource_qdflh")
-"Light 1" = SubResource("Resource_vtp77")
+data = SubResource("Resource_crdol")
+"Light 1" = SubResource("Resource_qdflh")
 
 [node name="TestDint_32BitSigned" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.605804, 0)
 text = "52"
 script = ExtResource("7_vtp77")
+
+[node name="OPCUATest" type="Node3D" parent="."]
+script = ExtResource("8_qdflh")
