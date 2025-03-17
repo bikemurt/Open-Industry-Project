@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://oyj4qucb6tme"]
+[gd_scene load_steps=13 format=3 uid="uid://oyj4qucb6tme"]
 
 [ext_resource type="PackedScene" uid="uid://dyhvoundu2kqc" path="res://parts/Building.tscn" id="1_t6gs0"]
 [ext_resource type="PackedScene" uid="uid://bq16fe5njnr2i" path="res://parts/Box.tscn" id="2_lfd1m"]
@@ -14,13 +14,26 @@ resource_local_to_scene = true
 script = ExtResource("6_qdflh")
 tag_group_name = "TagGroup0"
 tag_name = "TEST_OUTPUT"
-active = false
+active = true
 segment_color = Color(0, 1, 0, 0.5)
 
 [sub_resource type="Resource" id="Resource_crdol"]
 resource_local_to_scene = true
 script = ExtResource("5_vtp77")
 segment_datas = [SubResource("Resource_qdflh")]
+
+[sub_resource type="Resource" id="Resource_w5m0l"]
+resource_local_to_scene = true
+script = ExtResource("6_qdflh")
+tag_group_name = "TagGroup2"
+tag_name = "TEST_OUTPUT"
+active = false
+segment_color = Color(0, 1, 0, 0.5)
+
+[sub_resource type="Resource" id="Resource_liksr"]
+resource_local_to_scene = true
+script = ExtResource("5_vtp77")
+segment_datas = [SubResource("Resource_w5m0l")]
 
 [node name="Simulation" type="Node3D"]
 
@@ -35,10 +48,21 @@ tag_group_name = "TagGroup1"
 tag_name = "[TEST]TEST_INPUT"
 show_beam = true
 
+[node name="DiffuseSensor2" parent="." instance=ExtResource("3_uobxk")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0.31272, -1.788, -4.09003)
+tag_group_name = "TagGroup1"
+tag_name = "[TEST2]TEST_INPUT"
+show_beam = true
+
 [node name="StackLight" parent="." instance=ExtResource("4_mpm82")]
 transform = Transform3D(3, 0, 0, 0, 0.45, 0, 0, 0, 3, -2.73838, -2, 1.20489)
 data = SubResource("Resource_crdol")
 "Light 1" = SubResource("Resource_qdflh")
+
+[node name="StackLight2" parent="." instance=ExtResource("4_mpm82")]
+transform = Transform3D(3, 0, 0, 0, 0.45, 0, 0, 0, 3, 1.33607, -2, -3.20774)
+data = SubResource("Resource_liksr")
+"Light 1" = SubResource("Resource_w5m0l")
 
 [node name="TestDint_32BitSigned" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.605804, 0)

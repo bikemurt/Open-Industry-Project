@@ -10,11 +10,11 @@ border_width_bottom = 5
 Panel/styles/panel = SubResource("StyleBoxFlat_wwife")
 
 [node name="TagGroup" type="Control"]
-custom_minimum_size = Vector2(718, 73)
+custom_minimum_size = Vector2(860, 73)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 615.0
-offset_bottom = 65.0
+offset_right = 860.0
+offset_bottom = 73.0
 script = ExtResource("1_ugh8j")
 
 [node name="Panel" type="Panel" parent="."]
@@ -38,23 +38,23 @@ text = "Name"
 layout_mode = 0
 offset_left = 68.0
 offset_top = 4.0
-offset_right = 202.0
+offset_right = 318.0
 offset_bottom = 29.0
 select_all_on_focus = true
 
 [node name="PollingRateLabel" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 220.0
+offset_left = 348.0
 offset_top = 7.0
-offset_right = 317.0
+offset_right = 445.0
 offset_bottom = 24.0
 text = "Polling Rate (ms)"
 
 [node name="PollingRate" type="SpinBox" parent="Panel"]
 layout_mode = 0
-offset_left = 324.0
+offset_left = 452.0
 offset_top = 4.0
-offset_right = 419.0
+offset_right = 547.0
 offset_bottom = 29.0
 max_value = 1e+06
 step = 100.0
@@ -62,17 +62,17 @@ rounded = true
 
 [node name="ProtocolLabel" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 436.0
+offset_left = 564.0
 offset_top = 7.0
-offset_right = 491.0
+offset_right = 619.0
 offset_bottom = 24.0
 text = "Protocol"
 
 [node name="Protocol" type="OptionButton" parent="Panel"]
 layout_mode = 0
-offset_left = 500.0
+offset_left = 628.0
 offset_top = 4.0
-offset_right = 627.0
+offset_right = 755.0
 offset_bottom = 29.0
 selected = 0
 item_count = 3
@@ -95,39 +95,39 @@ text = "Gateway"
 layout_mode = 0
 offset_left = 68.0
 offset_top = 36.0
-offset_right = 202.0
+offset_right = 318.0
 offset_bottom = 61.0
 select_all_on_focus = true
 
 [node name="PathLabel" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 220.0
+offset_left = 348.0
 offset_top = 39.0
-offset_right = 317.0
+offset_right = 445.0
 offset_bottom = 56.0
 text = "Path"
 
 [node name="Path" type="LineEdit" parent="Panel"]
 layout_mode = 0
-offset_left = 324.0
+offset_left = 452.0
 offset_top = 36.0
-offset_right = 419.0
+offset_right = 547.0
 offset_bottom = 61.0
 select_all_on_focus = true
 
 [node name="CPULabel" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 436.0
+offset_left = 564.0
 offset_top = 39.0
-offset_right = 491.0
+offset_right = 619.0
 offset_bottom = 56.0
 text = "CPU"
 
 [node name="CPU" type="OptionButton" parent="Panel"]
 layout_mode = 0
-offset_left = 500.0
+offset_left = 628.0
 offset_top = 36.0
-offset_right = 627.0
+offset_right = 755.0
 offset_bottom = 61.0
 selected = 0
 item_count = 7
@@ -148,9 +148,9 @@ popup/item_6/id = 6
 
 [node name="Delete" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 650.0
+offset_left = 778.0
 offset_top = 21.0
-offset_right = 696.0
+offset_right = 824.0
 offset_bottom = 46.0
 text = "Delete"
 
