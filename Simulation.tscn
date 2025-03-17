@@ -41,8 +41,10 @@ data = SubResource("Resource_crdol")
 
 [node name="TestDint_32BitSigned" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.605804, 0)
-text = "52"
+text = "-1"
 script = ExtResource("7_vtp77")
+tag_group_name = "TagGroup1"
+tag_name = "[TEST]TEST_DINT"
 
 [node name="OPCUATest" type="Node3D" parent="."]
 script = ExtResource("8_qdflh")

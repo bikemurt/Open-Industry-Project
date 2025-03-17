@@ -122,7 +122,14 @@ func register_tag_groups() -> void:
 	for tag_group_data: Dictionary in tag_groups_data:
 		var n: String = tag_group_data.name
 		var pr: String = tag_group_data.polling_rate
-		var pt: String = tag_group_data.protocol
+		
+		var pt_num: String = tag_group_data.protocol
+		
+		var pt := ""
+		if pt_num == "0": pt = "ab_eip"
+		elif pt_num == "1": pt = "modbus_tcp"
+		elif pt_num == "2": pt = "opc_ua"
+		
 		var g: String = tag_group_data.gateway
 		var p: String = tag_group_data.path
 		var c: String = tag_group_data.cpu
