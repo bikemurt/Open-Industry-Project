@@ -27,11 +27,12 @@ segment_datas = [SubResource("Resource_qdflh")]
 [node name="Building" parent="." instance=ExtResource("1_t6gs0")]
 
 [node name="Box" parent="." instance=ExtResource("2_lfd1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57134, -1.5, -1.07682)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03956, -1.5, -1.07682)
 
 [node name="DiffuseSensor" parent="." instance=ExtResource("3_uobxk")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -0.86246, -1.788, -4.09003)
-tag_name = "TEST_INPUT"
+tag_group_name = "TagGroup1"
+tag_name = "[TEST]TEST_INPUT"
 show_beam = true
 
 [node name="StackLight" parent="." instance=ExtResource("4_mpm82")]
@@ -41,7 +42,7 @@ data = SubResource("Resource_crdol")
 
 [node name="TestDint_32BitSigned" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.605804, 0)
-text = "-1"
+text = "52"
 script = ExtResource("7_vtp77")
 tag_group_name = "TagGroup1"
 tag_name = "[TEST]TEST_DINT"
