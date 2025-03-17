@@ -15,6 +15,8 @@ var save_data := {}
 @onready var cpu: OptionButton = $Panel/CPU
 @onready var cpu_label: Label = $Panel/CPULabel
 @onready var path_label: Label = $Panel/PathLabel
+@onready var gateway_label: Label = $Panel/GatewayLabel
+
 
 var loading_complete := false
 
@@ -53,10 +55,12 @@ func update_protocol(_index: int) -> void:
 		cpu.hide()
 		cpu_label.hide()
 		path_label.text = "Namespace"
+		gateway_label.text = "Endpoint"
 	else:
 		cpu.show()
 		cpu_label.show()
 		path_label.text = "Path"
+		gateway_label.text = "Gateway"
 
 func _on_item_selected(_index: int) -> void:
 	update_protocol(_index)

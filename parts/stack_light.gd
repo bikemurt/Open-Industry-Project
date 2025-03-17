@@ -117,7 +117,7 @@ func _tag_group_polled(_tag_group_name: String) -> void:
 	if _tag_group_name in tags_by_group:
 		for tag_name in tags_by_group[_tag_group_name]:
 			var segment: StackSegmentData = tags_by_group[_tag_group_name][tag_name]
-			segment.active = bool(OIPComms.read_bit(_tag_group_name, tag_name))
+			segment.active = OIPComms.read_bit(_tag_group_name, tag_name)
 
 func _process(delta: float) -> void:
 	if scale != prev_scale:

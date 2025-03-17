@@ -43,6 +43,14 @@ enum ConvTexture {
 		if ce2:
 			ce2.Speed = Speed
 		UpdateBeltMaterialScale()
+		
+		if register_speed_tag_ok:
+			OIPComms.write_float32(speed_tag_group_name, speed_tag_name, value)
+			pass
+		
+		if register_running_tag_ok:
+			#OIPComms.write_bit(running_tag_group_name, running_tag_name, value > 0.0)
+			pass
 
 @export var BeltPhysicsMaterial : PhysicsMaterial:
 	get:
@@ -69,6 +77,14 @@ var belt_position: float = 0.0
 var box_size: Vector3
 
 var Main
+
+var register_speed_tag_ok := false
+var register_running_tag_ok := false
+@export var enable_comms := true
+@export var speed_tag_group_name := "TagGroup0"
+@export var speed_tag_name := ""
+@export var running_tag_group_name := "TagGroup0"
+@export var running_tag_name := ""
 
 func get_conveyor_end1():
 	return get_node_or_null("ConveyorEnd")
@@ -117,10 +133,14 @@ func _ready() -> void:
 			sb2.physics_material_override = sb.physics_material_override
 
 func _enter_tree() -> void:
+	SimulationEvents.simulation_started.connect(_on_simulation_started)
 	SimulationEvents.simulation_ended.connect(_on_simulation_ended)
+	OIPComms.tag_group_polled.connect(_tag_group_polled)
 
 func _exit_tree() -> void:
+	SimulationEvents.simulation_started.disconnect(_on_simulation_started)
 	SimulationEvents.simulation_ended.disconnect(_on_simulation_ended)
+	OIPComms.tag_group_polled.disconnect(_tag_group_polled)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_LOCAL_TRANSFORM_CHANGED:
@@ -159,6 +179,11 @@ func UpdateMetalMaterialScale() -> void:
 	if metal_material:
 		(metal_material as ShaderMaterial).set_shader_parameter("Scale", scale.x)
 
+func _on_simulation_started() -> void:
+	if enable_comms:
+		register_speed_tag_ok = OIPComms.register_tag(speed_tag_group_name, speed_tag_name, 1)
+		register_running_tag_ok = OIPComms.register_tag(running_tag_group_name, running_tag_name, 1)
+
 func _on_simulation_ended() -> void:
 	belt_position = 0.0
 	(belt_material as ShaderMaterial).set_shader_parameter("BeltPosition", belt_position)
@@ -167,3 +192,10 @@ func _on_simulation_ended() -> void:
 		if child is Node3D:
 			child.position = Vector3.ZERO
 			child.rotation = Vector3.ZERO
+
+func _tag_group_polled(_tag_group_name: String) -> void:
+	if not enable_comms: return
+	if _tag_group_name == speed_tag_group_name:
+		var read_value := OIPComms.read_float32(speed_tag_group_name, speed_tag_name)
+		#if read_value >= 0:
+		Speed = read_value
