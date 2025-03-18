@@ -46,11 +46,9 @@ enum ConvTexture {
 		
 		if register_speed_tag_ok:
 			OIPComms.write_float32(speed_tag_group_name, speed_tag_name, value)
-			pass
 		
 		if register_running_tag_ok:
-			#OIPComms.write_bit(running_tag_group_name, running_tag_name, value > 0.0)
-			pass
+			OIPComms.write_bit(running_tag_group_name, running_tag_name, value > 0.0)
 
 @export var BeltPhysicsMaterial : PhysicsMaterial:
 	get:
@@ -196,6 +194,4 @@ func _on_simulation_ended() -> void:
 func _tag_group_polled(_tag_group_name: String) -> void:
 	if not enable_comms: return
 	if _tag_group_name == speed_tag_group_name:
-		var read_value := OIPComms.read_float32(speed_tag_group_name, speed_tag_name)
-		#if read_value >= 0:
-		Speed = read_value
+		Speed = OIPComms.read_float32(speed_tag_group_name, speed_tag_name)

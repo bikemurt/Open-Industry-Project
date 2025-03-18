@@ -14,7 +14,7 @@ extends Node3D
 	set(value): _write_test()
 
 func _opc_test() -> void:
-	OIPComms.opc_ua_test()
+	#OIPComms.opc_ua_test()
 	pass
 
 func _reg_tag() -> void:

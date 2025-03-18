@@ -10,6 +10,8 @@ var ray_material: StandardMaterial3D
 @export var tag_group_name := "TagGroup0"
 @export var tag_name := ""
 
+var register_tag_ok := false
+
 @export var max_range: float = 6.0
 @export var show_beam: bool :
 	set(value): 
@@ -21,14 +23,10 @@ var ray_material: StandardMaterial3D
 @export var beam_scan_color: Color = Color.GREEN
 @export var blocked: bool = false:
 	set(value):
-		if register_tag_ok and last_blocked != int(value):
+		if register_tag_ok and value != blocked:
 			OIPComms.write_bit(tag_group_name, tag_name, value)
 
 		blocked = value
-		last_blocked = int(value)
-
-var last_blocked := 2 # init as 2 to ensure first write is picked up
-var register_tag_ok := false
 
 func _validate_property(property: Dictionary):
 	if property.name == "blocked":

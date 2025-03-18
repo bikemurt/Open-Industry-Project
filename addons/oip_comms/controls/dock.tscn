@@ -3,71 +3,57 @@
 [ext_resource type="Script" uid="uid://gat6xfeiidsw" path="res://addons/oip_comms/controls/oip_comms_dock.gd" id="1_ac54y"]
 
 [node name="Dock" type="Control"]
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(467, 300)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -348.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ac54y")
 
 [node name="EnableComms" type="CheckBox" parent="."]
-layout_mode = 0
-offset_left = 908.0
-offset_top = 34.0
-offset_right = 1022.0
-offset_bottom = 59.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -314.0
+offset_top = 8.0
+offset_right = -200.0
+offset_bottom = 33.0
+grow_horizontal = 0
 button_pressed = true
 text = "Enable Comms"
 
 [node name="EnableLogging" type="CheckBox" parent="."]
-layout_mode = 0
-offset_left = 908.0
-offset_top = 74.0
-offset_right = 1088.0
-offset_bottom = 99.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -188.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 33.0
+grow_horizontal = 0
 text = "Enable Logging to Console"
-
-[node name="TagGroupConfigLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 9.0
-offset_right = 148.0
-offset_bottom = 26.0
-text = "Tag Group Configuration"
 
 [node name="AddTagGroup" type="Button" parent="."]
 layout_mode = 0
-offset_left = 189.0
+offset_left = 9.0
 offset_top = 6.0
-offset_right = 313.0
+offset_right = 133.0
 offset_bottom = 31.0
 text = "Add Tag Group"
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 381.0
-offset_top = 6.0
-offset_right = 505.0
-offset_bottom = 31.0
-text = "Save"
-
-[node name="Button2" type="Button" parent="."]
-layout_mode = 0
-offset_left = 533.0
-offset_top = 6.0
-offset_right = 657.0
-offset_bottom = 31.0
-text = "Load"
-
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 44.0
-offset_right = 893.0
-offset_bottom = 279.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 43.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
@@ -76,5 +62,3 @@ size_flags_horizontal = 3
 [connection signal="toggled" from="EnableComms" to="." method="_on_EnableComms_toggled"]
 [connection signal="toggled" from="EnableLogging" to="." method="_on_EnableLogging_toggled"]
 [connection signal="pressed" from="AddTagGroup" to="." method="_on_AddTagGroup_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]

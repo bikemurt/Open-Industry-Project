@@ -102,10 +102,12 @@ func tag_group_delete(t: _OIPCommsTagGroup) -> void:
 		tag_groups_data.remove_at(index)
 		t.queue_free()
 
+# old save button
 func _on_Button_pressed() -> void:
 	save_tag_groups_ui()
 	save_tag_groups_data()
 
+# old load button
 func _on_Button2_pressed() -> void:
 	load_tag_groups_data()
 	load_tag_groups_ui()
